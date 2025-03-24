@@ -1,3 +1,8 @@
+/* Players can join a game by navigating to the same URL with the same `<unique_game_id>`.
+- The game state will be synchronized in real-time between all connected players.
+- Players can restart the game by clicking the "Restart" button.*/ 
+
+
 const socket = io();
 
 const gridContainer = document.querySelector('.grid-container');
