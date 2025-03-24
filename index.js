@@ -1,4 +1,4 @@
-/*global variables*/
+const socket = io();
 
 const gridContainer = document.querySelector('.grid-container');
 let cards = [];
@@ -7,10 +7,17 @@ let lockBoard = false; /* lock the board when two cards are flipped */
 let player1Score = 0;
 let player2Score = 0;
 let currentPlayer = 1;
+const gameId = window.location.pathname.split('/').pop();
 
 document.querySelector(".player1-score").textContent = player1Score;
 document.querySelector(".player2-score").textContent = player2Score;
 updatePlayerTurn();
+
+socket.emit('joinGame', gameId);
+
+socket.on('updateGameState', (state) => {
+    updateGameState(state);
+});
 
 /*card implementation*/
 
@@ -22,7 +29,6 @@ fetch("cards.json")
         createBoard();
     });
 
-    //makes the cards randomly generated
 function shuffleCards(){
     let index = cards.length,
     tempVal,randomVal;
@@ -37,7 +43,6 @@ function shuffleCards(){
     }
 }
 
-//generates the grid of cards
 function createBoard(){
     for(let card of cards){
         const cardElement = document.createElement('div');
@@ -54,7 +59,6 @@ function createBoard(){
     }
 }
 
-//in the event that the users click on a card
 function flipCard(){
     if(lockBoard) return;
     if (this == firstCard) return;
@@ -83,7 +87,7 @@ function checkForMatch(){
         unflipCards();
         switchPlayer();
     }
-    
+    updateGameState();
 }
 
 function disableCards(){
@@ -137,6 +141,7 @@ function restart(){
     createBoard();
     updatePlayerTurn();
     closeBox();
+    updateGameState();
 }
 
 function checkGameOver(){
@@ -158,19 +163,33 @@ function closeBox() {
     document.getElementById('custom-alert').style.display = 'none';
 }
 
+function updateGameState() {
+    const state = {
+        cards: Array.from(document.querySelectorAll('.card')).map(card => ({
+            name: card.dataset.name,
+            flipped: card.classList.contains('flipped')
+        })),
+        player1Score,
+        player2Score,
+        currentPlayer
+    };
+    socket.emit('updateGameState', gameId, state);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function updateGameState(state) {
+    state.cards.forEach((cardState, index) => {
+        const card = document.querySelectorAll('.card')[index];
+        card.dataset.name = cardState.name;
+        if (cardState.flipped) {
+            card.classList.add('flipped');
+        } else {
+            card.classList.remove('flipped');
+        }
+    });
+    player1Score = state.player1Score;
+    player2Score = state.player2Score;
+    currentPlayer = state.currentPlayer;
+    document.querySelector(".player1-score").textContent = player1Score;
+    document.querySelector(".player2-score").textContent = player2Score;
+    updatePlayerTurn();
+}
