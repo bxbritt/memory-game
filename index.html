@@ -1,33 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Memory Card Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
     <div class="container">
+        
         <!--player 1 score box-->
         <div class="scoreboard scoreboard-left">
             <div>P1 Score: <span class="player1-score">0</span></div>
         </div>
+       
+       
         <div>
             <h1>Memory Game</h1>
             <h2>Who can match the most cards?</h2>
             <p class="player-turn">Player 1, make your move!</p>
+           
             <!--layout of cards-->
             <div class="grid-container"></div>
+            
+            
             <!--button actions-->
             <div class="actions">
                 <button onclick="restart()">Restart</button> <!--restart button-->
             </div>
         </div>
+        
         <!--player 2 score box-->
         <div class="scoreboard scoreboard-right">
             <div>P2 Score: <span class="player2-score">0</span></div>
         </div>
     </div>
+
+
     <!-- custom alert box -->
     <div id="custom-alert" class="box">
         <div class="box-content">
@@ -36,7 +48,8 @@
             <button onclick="restart()">Restart</button>
         </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
+
     <script src="index.js"></script>
 </body>
+
 </html>
