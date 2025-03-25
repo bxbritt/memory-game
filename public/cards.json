@@ -1,0 +1,41 @@
+[
+    {
+        "image": "https://i.postimg.cc/7ZpzmBgL/Cat.png" ,
+        "name":"Cat"
+    },
+    {
+        "image": "https://i.postimg.cc/j2dnLBrM/Snake.png",
+        "name":"Snake"
+    },
+    {
+        "image": "https://i.postimg.cc/xdzvQr0H/Pig.png",
+        "name":"Pig"
+    },
+    {
+        "image": "https://i.postimg.cc/Kv8tz3Gm/Skunk.png",
+        "name":"Skunk"
+    },
+    {
+        "image": "https://i.postimg.cc/D02L181d/Penguin.png",
+        "name":"Penguin"
+    },
+    {
+        "image": "https://i.postimg.cc/WbYgJpzg/Lion.png",
+        "name":"Lion"
+    },
+    {
+        "image": "https://i.postimg.cc/rwdWG6Rb/Kohala.png",
+        "name":"Kohala"
+    },
+    {
+        "image": "https://i.postimg.cc/2y2vGrwp/Panda.png",
+        "name":"Panda"
+    },
+    {
+        "image": "https://i.postimg.cc/3rBgYFHL/Turtle.png",
+        "name":"Turtle"
+    }
+
+
+
+]
